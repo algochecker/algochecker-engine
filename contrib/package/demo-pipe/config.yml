@@ -7,7 +7,7 @@ configs:
                 timeout: 30000
                 cpu_quota: 25000
                 cpu_period: 50000
-                max_memory: "32M"
+                max_memory: "256M"
         env:
             name: "pipe"
         runner:

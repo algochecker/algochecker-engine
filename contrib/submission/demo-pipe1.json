@@ -1,0 +1,9 @@
+{
+    "uuid": null,
+    "package": {
+        "name": "demo-pipe",
+        "version": 1455108897,
+        "url": "http://127.0.0.1:5000/repo/demo-pipe.zip"
+    },
+    "features": ["async_report"]
+}

@@ -1,0 +1,74 @@
+#!/usr/local/bin/python
+import json
+import sys
+
+import errno
+
+
+def broken_pipe_error():
+    print(json.dumps({
+        'points': 0,
+        'max_points': 1,
+        'message': 'The program terminated unexpectedly.'
+    }))
+
+    sys.stdout.flush()
+    exit(0)
+
+
+def main():
+    try:
+        fin = open('/mnt/prog-in/input.txt', 'w')
+        fout = open('/mnt/prog-out/output.txt', 'r')
+
+        # give a signal that we are ready to start the test
+        # by unlocking a file spinlock in the engine
+        open('/mnt/out/srv-ready', 'w').close()
+
+        # read the number to be guessed from input/* file provided at stdin
+        actual_number = int(sys.stdin.readline().strip())
+        user_guess = None
+        num_guess = 0
+
+        while actual_number != user_guess:
+            try:
+                user_guess = int(fout.readline().strip())
+            except ValueError:
+                print(json.dumps({
+                    "points": 0.0,
+                    "max_points": 1.0,
+                    "message": "Invalid value provided by the program."
+                }))
+                sys.stdout.flush()
+                exit(0)
+
+            num_guess += 1
+
+            if user_guess > actual_number:
+                fin.write("1\n")
+            elif user_guess < actual_number:
+                fin.write("-1\n")
+            else:
+                fin.write("0\n")
+
+            fin.flush()
+
+        if num_guess <= 20:
+            points = 1.0
+        else:
+            points = max(0, 1.0 - (num_guess - 20) / 10)
+
+        print(json.dumps({
+            "points": points,
+            "max_points": 1.0,
+            "message": ""
+        }))
+        sys.stdout.flush()
+    except IOError as e:
+        if e.errno == errno.EPIPE:
+            broken_pipe_error()
+        else:
+            raise e
+
+
+main()

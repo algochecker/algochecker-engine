@@ -1,0 +1,14 @@
+[Unit]
+Description=Algochecker Engine
+After=network.target
+
+[Service]
+ExecStart=/opt/algochecker-engine/worker.py
+WorkingDirectory=/opt/algochecker-engine
+Environment="PATH=/opt/algochecker-engine:/usr/bin"
+TimeoutStopSec=30
+Restart=always
+PIDFile=/run/algo-engine.pid
+
+[Install]
+WantedBy=multi-user.target

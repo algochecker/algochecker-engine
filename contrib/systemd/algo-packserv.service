@@ -1,0 +1,14 @@
+[Unit]
+Description=Algochecker Standalone Package Server
+After=network.target
+
+[Service]
+ExecStart=/opt/algochecker-engine/contrib/packserv.py
+WorkingDirectory=/opt/algochecker-engine/contrib
+Environment="PATH=/opt/algochecker-engine/contrib:/usr/bin"
+TimeoutStopSec=0
+Restart=always
+PIDFile=/run/algo-packserv.pid
+
+[Install]
+WantedBy=multi-user.target

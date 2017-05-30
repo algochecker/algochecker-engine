@@ -1,0 +1,41 @@
+# each instance must have it's unique name
+INSTANCE_NAME = "worker"
+
+# will cause that engine will pause after processing each test
+# waiting for user input before continuing
+DEBUG_MODE = False
+
+REDIS_CONF = {
+    "host": "localhost"
+}
+
+DOCKER_CONF = {
+
+}
+
+DOCKER_CONTAINER_USER = "nobody"
+DOCKER_CONTAINER_GROUP = "nogroup"
+
+REDIS_QUEUE_KEY = "queue"
+
+NETWORKING_CONF = {
+    "network_name": "network",
+    "network_driver": "bridge",
+    "internal": True,
+    "ipam": {
+        "subnet": "172.16.0.0/16",
+        "iprange": "172.16.0.0/24"
+    },
+    "endpoints": {
+        "server_ip": "172.16.1.1",
+        "client_ip": "172.16.1.2",
+    }
+}
+
+# default log format for running algo-engine as a service
+LOG_FORMAT = "[%(levelname)s] %(message)s"
+
+# good log format for running algo-engine in standalone mode
+# LOG_FORMAT = "[%(asctime)s][%(levelname)s] %(message)s"
+
+LOG_DATEFMT = "%d/%m/%Y %H:%M:%S"

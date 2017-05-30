@@ -1,0 +1,12 @@
+tests: {}
+
+# in text mode, the \r, \r\n and \n newlines are taken to be equal
+# invalid unicode will cause an evaluation fail in text mode
+# in binary mode, bytes are just compared directly
+binary_mode: false
+
+# if the test is running longer than 50% of its timeout, then the points
+# are subtracted proportionally up; no more than 50% of total score will be subtracted
+slow_program_scale: "linear"
+slow_program_penalty: 0.5
+slow_program_threshold: 0.5

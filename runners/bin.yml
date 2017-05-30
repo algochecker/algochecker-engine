@@ -1,0 +1,7 @@
+image: "gcc:latest"
+location: "work/run"
+limits:
+    timeout: 1000
+    cpu_quota: 25000
+    cpu_period: 50000
+    max_memory: "128M"

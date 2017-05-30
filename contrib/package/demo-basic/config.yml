@@ -1,0 +1,21 @@
+configs:
+   _base:
+       compiler:
+           name: "gcc"
+           command_line: "-Wall -O2 -std=c++11"
+           limits:
+               timeout: 30000
+               cpu_quota: 25000
+               cpu_period: 50000
+               max_memory: "32M"
+       env:
+           name: "file"
+       runner:
+           name: "bin"
+           limits:
+               timeout: 1000
+               cpu_quota: 25000
+               cpu_period: 50000
+               max_memory: "32M"
+       evaluator:
+           name: "basic"

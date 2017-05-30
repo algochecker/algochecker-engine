@@ -1,0 +1,40 @@
+configs:
+    _base:
+        compiler:
+            limits:
+                timeout: 30000
+                cpu_quota: 25000
+                cpu_period: 50000
+                max_memory: "256M"
+        env:
+            name: "file"
+            tests:
+                test0:
+                    points: 0
+                    store_output: "public"
+                basic.test1:
+                    points: 1
+                basic.test2:
+                    points: 2
+                adv.test3:
+                    points: 5
+        runner:
+            limits:
+                timeout: 1000
+                cpu_quota: 25000
+                cpu_period: 50000
+                max_memory: "256M"
+        evaluator:
+            name: "basic"
+    gcc-cpp:
+        compiler:
+            name: "gcc"
+            command_line: "-Wall -O2 -std=c++11"
+        runner:
+            name: "bin"
+    gcc-c:
+        compiler:
+            name: "gcc"
+            command_line: "-Wall -O2 -std=c"
+        runner:
+            name: "bin"

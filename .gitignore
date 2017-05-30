@@ -1,0 +1,5 @@
+/.idea/
+/worker_conf.py
+**.pyc
+.DS_Store
+

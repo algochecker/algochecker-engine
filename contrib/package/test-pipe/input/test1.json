@@ -1,0 +1,52 @@
+{
+  "strategy": 1,
+  "tolerance": 100,
+  "duration": 5000,
+  "processes": {
+    "1": {
+      "spawn_time": 0,
+      "expected_work_time": 1100,
+      "events": [
+        ["cpu", 1000],
+        ["io", 1000],
+        ["cpu", 1000]
+      ]
+    },
+    "2": {
+      "spawn_time": 1000,
+      "expected_work_time": 1100,
+      "events": [
+        ["cpu", 1000],
+        ["io", 500],
+        ["cpu", 200]
+      ]
+    },
+    "3": {
+      "spawn_time": 0,
+      "expected_work_time": 1100,
+      "events": [
+        ["cpu", 1000],
+        ["io", 1000],
+        ["cpu", 1000]
+      ]
+    },
+    "4": {
+      "spawn_time": 0,
+      "expected_work_time": 1100,
+      "events": [
+        ["cpu", 1000],
+        ["io", 1000],
+        ["cpu", 1000]
+      ]
+    },
+    "5": {
+      "spawn_time": 0,
+      "expected_work_time": 1100,
+      "events": [
+        ["cpu", 1000],
+        ["io", 1000],
+        ["cpu", 1000]
+      ]
+    }
+  }
+}

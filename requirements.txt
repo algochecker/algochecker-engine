@@ -1,0 +1,6 @@
+docker-py
+redis
+pyyaml
+uuid
+flask
+requests

@@ -1,0 +1,49 @@
+configs:
+    _base:
+        compiler:
+            limits:
+                timeout: 30000
+                cpu_quota: 25000
+                cpu_period: 50000
+                max_memory: "256M"
+            command_line: "-Wall -O2 -std=c++11"
+            strip_command_line: "--strip-symbol=main"
+            inject_command_line: "-Wall -O2 --std=c++11"
+            link_command_line: ""
+            inject_files: ["rpc.c"]
+        env:
+            name: "pipe"
+            tests:
+                test1:
+                    store_output: "public"
+                test2:
+                    store_output: "public"
+        service_runner:
+            name: "bin"
+            image: "python:latest"
+            limits:
+                timeout: 30000
+                cpu_quota: 25000
+                cpu_period: 50000
+                max_memory: "256M"
+        runner:
+            limits:
+                timeout: 1000
+                cpu_quota: 25000
+                cpu_period: 50000
+                max_memory: "256M"
+        evaluator:
+            name: "basic"
+    gcc-cpp:
+        compiler:
+            name: "gcc"
+            command_line: "-Wall -O2 -std=c++11"
+        runner:
+            name: "bin"
+    gcc-c:
+        compiler:
+            name: "gcc"
+            command_line: "-Wall -O2 -x c"
+            inject_command_line: "-Wall -O2 -x c"
+        runner:
+            name: "bin"

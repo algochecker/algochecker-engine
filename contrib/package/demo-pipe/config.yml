@@ -1,0 +1,30 @@
+configs:
+    _base:
+        compiler:
+            name: "gcc"
+            command_line: "-Wall -O2 -std=c++11"
+            limits:
+                timeout: 30000
+                cpu_quota: 25000
+                cpu_period: 50000
+                max_memory: "32M"
+        env:
+            name: "pipe"
+        runner:
+            name: "bin"
+            image: "gcc:latest"
+            limits:
+                timeout: 1000
+                cpu_quota: 25000
+                cpu_period: 50000
+                max_memory: "32M"
+        service_runner:
+            name: "bin"
+            image: "python:latest"
+            limits:
+                timeout: 30000
+                cpu_quota: 25000
+                cpu_period: 50000
+                max_memory: "256M"
+        evaluator:
+            name: "basic"

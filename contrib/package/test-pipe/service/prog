@@ -1,0 +1,68 @@
+#!/usr/local/bin/python
+import json
+import sys
+
+import errno
+
+
+def broken_pipe_error():
+    print(json.dumps({
+        'points': 0,
+        'max_points': 1,
+        'message': 'The program terminated unexpectedly.'
+    }))
+
+    sys.stdout.flush()
+
+    exit(0)
+
+try:
+    fin = open('/mnt/prog-in/input.txt', 'w')
+    fout = open('/mnt/prog-out/output.txt', 'r')
+
+    open('/mnt/out/srv-ready', 'w').close()
+
+    result = 0
+
+    if fout.readline().strip() == "hello":
+        result += 1
+
+    fin.write("1\n")
+    fin.flush()
+
+    if fout.readline().strip() == 'k':
+        result += 1
+
+    fin.write("2\n")
+    fin.flush()
+
+    if fout.readline().strip() == 'k':
+        result += 1
+
+    fin.write("3\n")
+    fin.flush()
+
+    if fout.readline().strip() == 'k':
+        result += 1
+
+    fin.write("0\n")
+    fin.flush()
+
+    if int(fout.readline().strip()) == 6:
+        result += 1
+
+    if fout.readline().strip() == 'bye':
+        result += 1
+
+    print(json.dumps({
+        "points": result,
+        "max_points": 6,
+        "message": "Some message here."
+    }))
+
+    sys.stdout.flush()
+except IOError as e:
+    if e.errno == errno.EPIPE:
+        broken_pipe_error()
+    else:
+        raise e

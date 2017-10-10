@@ -61,7 +61,7 @@ def standalone_main():
                 continue
 
             report = json.loads(data['data'].decode('utf-8'))
-            print('{}\t{}\t{}'.format(
+            print('{}\t{}\t{}\t{}\t{}\t{}'.format(
                 report['uuid'], report['status'], report['score'], report['checked_by'],
                 report['time_stats']['started_ms'], report['time_stats']['took_time_ms']))
         else:

@@ -45,7 +45,7 @@ def convert_test_list(data):
 
 def standalone_main():
     parser = argparse.ArgumentParser(prog='collect.py')
-    parser.add_argument('table', help='tabular mode')
+    parser.add_argument('table', help='tabular mode', action='store_true')
 
     args = parser.parse_args()
 

@@ -45,13 +45,23 @@ def convert_test_list(data):
 
 def standalone_main():
     parser = argparse.ArgumentParser(prog='collect.py')
+    parser.add_argument('table', help='tabular mode')
+
     args = parser.parse_args()
 
     pubsub = rs.pubsub()
     pubsub.subscribe("reports")
 
+    print('uuid\tstatus\tscore\tchecked by\tstarted\ttook time')
+
     for data in pubsub.listen():
-        print(data)
+        if args.table:
+            report = json.loads(data.decode('utf-8'))
+            print('{}\t{}\t{}'.format(
+                report['uuid'], report['status'], report['score'], report['checked_by'],
+                report['time_stats']['started_ms'], report['time_stats']['took_time_ms']))
+        else:
+            print(data)
 
 if __name__ == "__main__":
     standalone_main()

@@ -52,7 +52,8 @@ def standalone_main():
     pubsub = rs.pubsub()
     pubsub.subscribe("reports")
 
-    print('uuid\tstatus\tscore\tchecked by\tstarted\ttook time')
+    if args.table:
+        print('uuid\tstatus\tscore\tchecked by\tstarted\ttook time')
 
     for data in pubsub.listen():
         if args.table:

@@ -45,7 +45,7 @@ def convert_test_list(data):
 
 def standalone_main():
     parser = argparse.ArgumentParser(prog='collect.py')
-    parser.add_argument('table', help='tabular mode', action='store_true')
+    parser.add_argument('--table', help='tabular mode', action='store_true')
 
     args = parser.parse_args()
 
@@ -56,7 +56,10 @@ def standalone_main():
 
     for data in pubsub.listen():
         if args.table:
-            report = json.loads(data.decode('utf-8'))
+            if data['type'] != 'message':
+                continue
+
+            report = json.loads(data['data'].decode('utf-8'))
             print('{}\t{}\t{}'.format(
                 report['uuid'], report['status'], report['score'], report['checked_by'],
                 report['time_stats']['started_ms'], report['time_stats']['took_time_ms']))
